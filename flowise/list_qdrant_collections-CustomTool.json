@@ -1,0 +1,8 @@
+{
+  "name": "list_qdrant_collections",
+  "description": "List Qdrant collections available to the agent.",
+  "color": "linear-gradient(rgb(0,128,96), rgb(72,189,148))",
+  "iconSrc": "",
+  "schema": "[{\"id\":0,\"property\":\"qdrant_url\",\"description\":\"Override Qdrant base URL (defaults to http://qdrant:6333)\",\"type\":\"string\",\"required\":false}]",
+  "func": "/*\n* Optionally set $vars.qdrantApiKey for authenticated clusters.\n*/\n\nconst fetch = require('node-fetch');\nconst baseUrl = $qdrant_url || $vars.qdrantUrl || 'http://qdrant:6333';\nconst apiKey = $vars.qdrantApiKey;\n\nconst response = await fetch(`${baseUrl.replace(/\\/$/, '')}/collections`, {\n    method: 'GET',\n    headers: apiKey ? { 'api-key': apiKey } : {}\n});\n\nif (!response.ok) {\n    const text = await response.text();\n    throw new Error(`Qdrant error: ${response.status} ${text}`);\n}\n\nconst data = await response.json();\nconst names = data.result?.collections?.map((c) => c.name) || [];\nreturn names.length ? names.join(', ') : 'No collections found.';"
+}

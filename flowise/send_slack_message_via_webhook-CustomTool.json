@@ -1,0 +1,8 @@
+{
+  "name": "send_slack_message_via_webhook",
+  "description": "Send a formatted message to a Slack incoming webhook.",
+  "color": "linear-gradient(rgb(74,21,75), rgb(139,80,201))",
+  "iconSrc": "",
+  "schema": "[{\"id\":0,\"property\":\"message\",\"description\":\"Message body to forward to Slack\",\"type\":\"string\",\"required\":true}]",
+  "func": "/*\n* Requires $vars.slackWebhookUrl to be set in Flowise.\n*/\n\nconst fetch = require('node-fetch');\nconst webhookUrl = $vars.slackWebhookUrl;\n\nif (!webhookUrl) {\n    throw new Error('Set $vars.slackWebhookUrl before using this tool.');\n}\n\nconst payload = { text: $message } ;\n\nconst response = await fetch(webhookUrl, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify(payload)\n});\n\nif (!response.ok) {\n    const text = await response.text();\n    throw new Error(`Slack webhook error: ${response.status} ${text}`);\n}\n\nreturn 'Message delivered to Slack.';"
+}

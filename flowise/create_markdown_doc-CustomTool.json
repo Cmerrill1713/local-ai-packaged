@@ -1,0 +1,8 @@
+{
+  "name": "create_markdown_doc",
+  "description": "Create a markdown note inside the shared volume for quick ingestion.",
+  "color": "linear-gradient(rgb(64,64,64), rgb(120,120,120))",
+  "iconSrc": "",
+  "schema": "[{\"id\":0,\"property\":\"document_title\",\"description\":\"Title for the markdown file\",\"type\":\"string\",\"required\":true},{\"id\":1,\"property\":\"document_text\",\"description\":\"Markdown content to store\",\"type\":\"string\",\"required\":true}]",
+  "func": "/*\n* Custom tool executed inside the Flowise container.\n* $vars.sharedDirectory can override the default /data/shared path.\n*/\n\nconst fs = require('fs');\nconst path = require('path');\n\nconst baseDir = $vars.sharedDirectory || '/data/shared';\nconst safeTitle = ($document_title || 'note').replace(/[^a-z0-9-_]+/gi, '-');\nconst timestamp = new Date().toISOString().replace(/[:.]/g, '-');\nconst fileName = `${safeTitle}-${timestamp}.md`;\nconst filePath = path.join(baseDir, fileName);\n\ntry {\n    fs.mkdirSync(baseDir, { recursive: true });\n    const header = $document_title ? `# ${$document_title}\n\n` : '';\n    fs.writeFileSync(filePath, `${header}${$document_text}\n`, 'utf8');\n    return `Created markdown document at ${filePath}`;\n} catch (error) {\n    console.error(error);\n    throw new Error('Failed to write markdown document: ' + error.message);\n}"
+}
