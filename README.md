@@ -212,11 +212,15 @@ to get started.
 1. Open <http://localhost:5678/> in your browser to set up n8n. You’ll only
    have to do this once. You are NOT creating an account with n8n in the setup here,
    it is only a local account for your instance!
-2. Import the included **Local Agentic RAG AI Agent** workflow. In n8n, choose
-   **Import from File** and select `n8n/backup/workflows/Local_Agentic_RAG_AI_Agent.json`
-   from this repository. This consolidated workflow combines the retrieval,
-   Supabase, and agentic tooling from prior versions into a single advanced
-   template.
+2. Open the consolidated **Local Agentic RAG AI Agent** workflow at
+   <http://localhost:5678/workflow/RssROpqkXOm23GYL>. The compose setup
+   auto-imports `n8n/backup/workflows/Local_Agentic_RAG_AI_Agent.json`, so the
+   workflow is ready after the containers finish booting. This advanced
+   template keeps the Supabase/Postgres PGVector pipeline from v2/v3 and now
+   also provisions the Qdrant tooling from v1 for hybrid retrieval, so you can
+   choose either vector store (or run both) without juggling multiple exports.
+   A breakdown of the merged capabilities lives in
+   [`docs/workflows/Local_Agentic_RAG_AI_Agent.md`](docs/workflows/Local_Agentic_RAG_AI_Agent.md).
 3. Create credentials for every service:
    
    Ollama URL: http://ollama:11434
