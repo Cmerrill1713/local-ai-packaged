@@ -5,7 +5,7 @@ quickly bootstraps a fully featured Local AI and Low Code development
 environment including Ollama for your local LLMs, Open WebUI for an interface to chat with your N8N agents, and Supabase for your database, vector store, and authentication. 
 
 This is Cole's version with a couple of improvements and the addition of Supabase, Open WebUI, Flowise, Langfuse, SearXNG, and Caddy!
-Also, the local RAG AI Agent workflows from the video will be automatically in your 
+Also, the fully agentic local RAG AI Agent workflow from the video will be automatically in your
 n8n instance if you use this setup instead of the base one provided by n8n!
 
 ## Important Links
@@ -212,8 +212,11 @@ to get started.
 1. Open <http://localhost:5678/> in your browser to set up n8n. You’ll only
    have to do this once. You are NOT creating an account with n8n in the setup here,
    it is only a local account for your instance!
-2. Open the included workflow:
-   <http://localhost:5678/workflow/vTN9y2dLXqTiDfPT>
+2. Import the included **Local Agentic RAG AI Agent** workflow. In n8n, choose
+   **Import from File** and select `n8n/backup/workflows/Local_Agentic_RAG_AI_Agent.json`
+   from this repository. This consolidated workflow combines the retrieval,
+   Supabase, and agentic tooling from prior versions into a single advanced
+   template.
 3. Create credentials for every service:
    
    Ollama URL: http://ollama:11434
