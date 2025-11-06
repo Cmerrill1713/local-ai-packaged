@@ -1,0 +1,8 @@
+{
+  "name": "fetch_slack_conversation",
+  "description": "Retrieve recent messages from a Slack channel or DM thread.",
+  "color": "linear-gradient(rgb(30,144,255), rgb(100,181,246))",
+  "iconSrc": "",
+  "schema": "[{\"id\":0,\"property\":\"channel_id\",\"description\":\"Slack channel or conversation ID\",\"type\":\"string\",\"required\":true},{\"id\":1,\"property\":\"message_limit\",\"description\":\"Number of messages to fetch (max 200)\",\"type\":\"number\",\"required\":false}]",
+  "func": "/*\n* Requires $vars.slackBotToken to be set in Flowise.\n*/\n\nconst fetch = require('node-fetch');\nconst token = $vars.slackBotToken;\n\nif (!token) {\n    throw new Error('Set $vars.slackBotToken before using this tool.');\n}\n\nconst limit = Math.min(Math.max(parseInt($message_limit || '20', 10), 1), 200);\nconst url = new URL('https://slack.com/api/conversations.history');\nurl.searchParams.set('channel', $channel_id);\nurl.searchParams.set('limit', limit.toString());\n\nconst response = await fetch(url.toString(), {\n    method: 'GET',\n    headers: {\n        'Authorization': `Bearer ${token}`,\n        'Content-Type': 'application/json'\n    }\n});\n\nconst data = await response.json();\n\nif (!data.ok) {\n    throw new Error('Slack API error: ' + (data.error || 'unknown'));\n}\n\nconst formatted = data.messages\n    .map((msg) => `• ${new Date(msg.ts * 1000).toISOString()} - ${msg.user || 'system'}: ${msg.text}`)\n    .join('\n');\n\nreturn formatted || 'No recent messages.';"
+}

@@ -3,13 +3,6 @@
     email {$LETSENCRYPT_EMAIL}
 }
 
-# N8N
-{$N8N_HOSTNAME} {
-    # For domains, Caddy will automatically use Let's Encrypt
-    # For localhost/port addresses, HTTPS won't be enabled
-    reverse_proxy localhost:5678
-}
-
 # Open WebUI
 {$WEBUI_HOSTNAME} {
     reverse_proxy localhost:3000
@@ -30,9 +23,9 @@
     reverse_proxy localhost:11434
 }
 
-# Supabase
-{$SUPABASE_HOSTNAME} {
-    reverse_proxy localhost:8000
+# Qdrant API
+{$QDRANT_HOSTNAME} {
+    reverse_proxy localhost:6333
 }
 
 # SearXNG

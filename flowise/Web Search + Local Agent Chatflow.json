@@ -577,7 +577,7 @@
         ],
         "inputAnchors": [],
         "inputs": {
-          "selectedTool": "cbc24643-ad81-4769-911f-089c8e4c87ab",
+          "selectedTool": "",
           "returnDirect": ""
         },
         "outputAnchors": [
@@ -641,7 +641,7 @@
         ],
         "inputAnchors": [],
         "inputs": {
-          "selectedTool": "54bc0754-c127-416c-8cd0-db2902f2fce8",
+          "selectedTool": "",
           "returnDirect": ""
         },
         "outputAnchors": [
@@ -705,7 +705,7 @@
         ],
         "inputAnchors": [],
         "inputs": {
-          "selectedTool": "83ef936c-4579-48a3-b95f-fbefc6926b65",
+          "selectedTool": "",
           "returnDirect": ""
         },
         "outputAnchors": [
@@ -769,7 +769,7 @@
         ],
         "inputAnchors": [],
         "inputs": {
-          "selectedTool": "59ace78e-575c-4f38-958d-a80e46be1e64",
+          "selectedTool": "",
           "returnDirect": ""
         },
         "outputAnchors": [
